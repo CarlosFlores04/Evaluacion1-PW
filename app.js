@@ -13,5 +13,5 @@ app.use((req, res) => {
 });
 
 app.listen(PUERTO, () => {
-    console.log("Servidor de incidencias escuchando en http://localhost:" + PUERTO);
+    console.log("Servidor de incidencias escuchando en http://localhost/:" + PUERTO);
 });

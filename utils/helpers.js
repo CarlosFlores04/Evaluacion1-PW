@@ -16,7 +16,6 @@ function esPrioridadValida(prioridad) {
             return false;
     }
 }
-
 //pasa el estado a minusculas y lo compara
 function normalizarEstado(estadoRecibido) {
     const estadoLimpio = estadoRecibido.trim().toLowerCase();

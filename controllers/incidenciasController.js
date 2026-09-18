@@ -1,6 +1,6 @@
 const helpers = require("../utils/helpers");
 
-let incidencias = [];
+const incidencias = [];
 let siguienteId = 1;
 
 function registrarIncidencia(req, res) {
@@ -8,21 +8,13 @@ function registrarIncidencia(req, res) {
 
     if (!helpers.esTextoValido(empleado)) {
         return res.status(400).json({ mensaje: "El campo empleado es obligatorio y no puede estar vacio" });
-    }
-
-    if (!helpers.esTextoValido(area)) {
+    } else if (!helpers.esTextoValido(area)) {
         return res.status(400).json({ mensaje: "El campo area es obligatorio y no puede estar vacio" });
-    }
-
-    if (!helpers.esTextoValido(descripcion)) {
+    } else if (!helpers.esTextoValido(descripcion)) {
         return res.status(400).json({ mensaje: "El campo descripcion es obligatorio y no puede estar vacio" });
-    }
-
-    if (!helpers.esTextoValido(prioridad)) {
+    } else if (!helpers.esTextoValido(prioridad)) {
         return res.status(400).json({ mensaje: "El campo prioridad es obligatorio y no puede estar vacio" });
-    }
-
-    if (!helpers.esPrioridadValida(prioridad)) {
+    } else if (!helpers.esPrioridadValida(prioridad)) {
         return res.status(400).json({ mensaje: "La prioridad debe ser Alta, Media o Baja" });
     }
 
