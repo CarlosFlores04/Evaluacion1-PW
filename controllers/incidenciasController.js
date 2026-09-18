@@ -86,10 +86,30 @@ function eliminarIncidencia(req, res) {
     res.status(200).json({ mensaje: "Incidencia eliminada correctamente" });
 }
 
+function obtenerEstadisticas(req, res) {
+    const estadisticas = helpers.calcularEstadisticas(incidencias);
+    res.status(200).json(estadisticas);
+}
+
+function obtenerClasificacion(req, res) {
+    const id = Number(req.params.id);
+    const incidenciaEncontrada = incidencias.find((incidencia) => incidencia.id === id);
+
+    if (!incidenciaEncontrada) {
+        return res.status(404).json({ mensaje: "Incidencia no encontrada" });
+    }
+
+    const clasificacion = helpers.obtenerClasificacionPorPrioridad(incidenciaEncontrada.prioridad);
+
+    res.status(200).json({ id: incidenciaEncontrada.id, clasificacion: clasificacion });
+}
+
 module.exports = {
     registrarIncidencia,
     listarIncidencias,
     buscarIncidenciaPorId,
     cambiarEstadoIncidencia,
-    eliminarIncidencia
+    eliminarIncidencia,
+    obtenerEstadisticas,
+    obtenerClasificacion
 };
