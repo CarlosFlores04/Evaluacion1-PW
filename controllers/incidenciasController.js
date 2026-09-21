@@ -1,7 +1,15 @@
 const helpers = require("../utils/helpers");
 
 const incidencias = [];
-let siguienteId = 1;
+
+// busca el primer id libre, revisando desde el 1 hacia arriba
+function obtenerSiguienteIdDisponible() {
+    let candidato = 1;
+    while (incidencias.some((incidencia) => incidencia.id === candidato)) {
+        candidato++;
+    }
+    return candidato;
+}
 
 function registrarIncidencia(req, res) {
     const { empleado, area, descripcion, prioridad } = req.body;
@@ -19,7 +27,7 @@ function registrarIncidencia(req, res) {
     }
 
     const nuevaIncidencia = {
-        id: siguienteId,
+        id: obtenerSiguienteIdDisponible(),
         empleado: empleado.trim(),
         area: area.trim(),
         descripcion: descripcion.trim(),
@@ -28,7 +36,6 @@ function registrarIncidencia(req, res) {
     };
 
     incidencias.push(nuevaIncidencia);
-    siguienteId++;
 
     res.status(201).json({ mensaje: "Incidencia registrada correctamente" });
 }
